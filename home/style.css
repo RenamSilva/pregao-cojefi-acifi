@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.main {
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    background-color: #102226;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    align-items: center;
+    font-family: 'poppins';
+    justify-content: space-between;
+    color: white;
+    display: flex;
+    background: #400067;
+}
+
+header h1 {
+    color: #00FF75;
+    margin-left: -325px;
+}
+
+header h2 {
+    font-size: 16px;
+    margin-right: 5px;
+    font-weight: 400;
+}
+
+.undefined {
+    margin-left: 15%;
+    width: 15%;
+}
+
+.btn {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    margin: 10px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+#btn {
+    cursor: pointer;
+
+}
+
+#btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1em #190322;
+}
+
+.btn img {
+    margin-top: 8px;
+}
+
+.div_pc {
+    display: flex;
+    align-items: center;
+    margin-right: -380px;
+}
+
+.div_browser {
+    display: flex;
+    align-items: center;
+    margin-right: -350px;
+}
+
+.all {
+    margin-right: -360px;
+}
+
+.fav {
+    font-weight: 600;
+    margin-right: 50px;
+}
+
+.menu_lateral {
+    font-family: 'poppins';
+    display: flex;
+    align-items: center;
+    height: 89%;
+    width: 190px;
+    flex-direction: column;
+    border: 2px solid #8258A0;
+    background-size: cover;
+    background-color: #215966;
+}
+
+.home {
+    color: #00FF75;
+    box-shadow: 0 0 1em #00FF75;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #400067;
+    background-color: #400067;
+    border-radius: 50px;
+    height: 46px;
+    width: 140px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.menu_lateral img {
+    width: 30px;
+}
+
+.menu_lateral ul {
+    list-style: none;
+}
+
+.menu_lateral ul li {
+    cursor: pointer;
+    transition: background .3s;
+    display: block;
+    padding: 10px 15px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.menu_lateral ul li:hover {
+    background-color: #542377;
+    width: 190px;
+}
