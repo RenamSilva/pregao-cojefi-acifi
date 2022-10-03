@@ -9,13 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "areAtuacao", schema = "pregao")
+@Table(name = "tb_area_atuacoes", schema = "pregao")
 public class AreaAtuacao {
+
     @Id
     @Getter @Setter
+    @Column(name = "id", length = 25, nullable = false, unique = true)
     private Long id;
 
-    @Setter @Getter
-    @Column(name = "nome", nullable = false, unique = false)
+    @Getter @Setter
+    @Column(name = "nome", length = 64, nullable = false, unique = true)
     private String nome;
 }
