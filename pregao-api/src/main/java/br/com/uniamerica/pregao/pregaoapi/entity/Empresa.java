@@ -52,4 +52,11 @@ public class Empresa {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa", nullable = false)
     private Set<Usuario> usuarios;
+
+    @Getter @Setter
+    @JoinTable(name = "tb_empresa_area_atuacao", schema = "pregao",
+            joinColumns = {@JoinColumn(name = "id_empresas", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_areas_atuacoes", referencedColumnName = "id", nullable = false)})
+    @ManyToMany
+    private Set<AreaAtuacao> areas_atuacoes;
 }
