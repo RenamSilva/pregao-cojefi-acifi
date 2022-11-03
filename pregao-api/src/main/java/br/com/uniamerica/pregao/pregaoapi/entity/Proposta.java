@@ -12,12 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tb_propostas", schema = "pregao")
-public class Proposta {
-
-    @Id
-    @Getter @Setter
-    @Column(name = "id", length = 25, nullable = false, unique = true)
-    private Long id;
+public class Proposta extends AbstractEntity {
 
     @Getter @Setter
     @Column(name = "conteudo", length = 255, nullable = false)

@@ -13,10 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_empresas", schema = "pregao")
-public class Empresa {
-    @Id
-    @Getter @Setter
-    private Long id;
+public class Empresa extends AbstractEntity {
 
     @Getter @Setter
     @Column(name = "nome", length = 64, unique = false, nullable = false)
@@ -25,14 +22,6 @@ public class Empresa {
     @Getter @Setter
     @Column(name = "cnpj", length = 15, unique = true, nullable = false)
     private String cnpj;
-
-    @Getter @Setter
-    @Column(name = "data_atualizacao", unique = false, nullable = false)
-    private LocalDate dataAtualizacao;
-
-    @Getter @Setter
-    @Column(name = "data_cadastro", unique = false, nullable = false)
-    private String dataCadastro;
 
     @Getter @Setter
     @Column(name = "imagem", length = 255, unique = false, nullable = true)
