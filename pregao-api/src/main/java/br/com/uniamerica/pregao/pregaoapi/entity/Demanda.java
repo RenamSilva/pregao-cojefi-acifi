@@ -16,6 +16,7 @@ public class Demanda{
 
     @Id
     @Getter @Setter
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 25, nullable = false, unique = true)
     private Long id;
 
