@@ -1,7 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.controller;
 
 import br.com.uniamerica.pregao.pregaoapi.entity.Proposta;
-import br.com.uniamerica.pregao.pregaoapi.repository.PropostaRepository;
 import br.com.uniamerica.pregao.pregaoapi.service.PropostaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

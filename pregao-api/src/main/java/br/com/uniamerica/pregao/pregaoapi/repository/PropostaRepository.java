@@ -1,6 +1,5 @@
 package br.com.uniamerica.pregao.pregaoapi.repository;
 
-import br.com.uniamerica.pregao.pregaoapi.entity.Demanda;
 import br.com.uniamerica.pregao.pregaoapi.entity.Proposta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

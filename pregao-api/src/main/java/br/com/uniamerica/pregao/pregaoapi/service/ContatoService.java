@@ -1,9 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.service;
 
-import br.com.uniamerica.pregao.pregaoapi.controller.ContatoController;
 import br.com.uniamerica.pregao.pregaoapi.entity.Contato;
-import br.com.uniamerica.pregao.pregaoapi.entity.Demanda;
-import br.com.uniamerica.pregao.pregaoapi.entity.Empresa;
 import br.com.uniamerica.pregao.pregaoapi.entity.TipoContato;
 import br.com.uniamerica.pregao.pregaoapi.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
