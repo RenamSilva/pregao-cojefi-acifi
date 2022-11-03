@@ -12,11 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_usuarios", schema = "pregao")
-public class Usuario {
-    @Id
-    @Getter @Setter
-    private Long id;
-
+public class Usuario extends AbstractEntity {
     @Getter @Setter
     @Column(name = "nome", length = 64, unique = false, nullable = false)
     private String nome;
@@ -28,10 +24,6 @@ public class Usuario {
     @Getter @Setter
     @Column(name = "senha", length = 1024, unique = false, nullable = false)
     private String senha;
-
-    @Getter @Setter
-    @Column(name = "data_cadastro", unique = false, nullable = false)
-    private LocalDate dataCadastro;
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)

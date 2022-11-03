@@ -12,13 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tb_historicosAtualizacaoStatusDemandas", schema = "pregao")
-public class HistoricoAtualizacaoStatusDemanda {
-
-    @Id
-    @Getter @Setter
-    @Column(name = "id", length = 25, nullable = false, unique = true)
-    private Long id;
-
+public class HistoricoAtualizacaoStatusDemanda extends AbstractEntity {
     @Getter @Setter
     @Column(name = "dataCadastro", nullable = false, scale = 3, precision = 6)
     private LocalDateTime dataCadastro;

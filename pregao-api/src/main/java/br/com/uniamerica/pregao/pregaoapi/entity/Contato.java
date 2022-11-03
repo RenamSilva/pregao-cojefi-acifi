@@ -11,11 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_contatos", schema = "pregao")
-public class Contato {
-    @Id
-    @Getter @Setter
-    private Long id;
-
+public class Contato extends AbstractEntity {
     @Getter @Setter
     @Column(name = "valor", length = 255, unique = false, nullable = false)
     private String valor;

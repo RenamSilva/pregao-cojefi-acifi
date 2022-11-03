@@ -12,13 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tb_demandas", schema = "pregao")
-public class Demanda{
-
-    @Id
-    @Getter @Setter
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", length = 25, nullable = false, unique = true)
-    private Long id;
+public class Demanda extends AbstractEntity {
 
     @Getter @Setter
     @Column(name = "titulo", length = 64, nullable = false)

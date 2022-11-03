@@ -20,11 +20,11 @@ public class DemandaService {
     private EmpresaRepository empresaRepository;
 
     public List<Demanda> listAll (){
-        return this.demandaRepository.findAll();
+        return this.demandaRepository.findByAtivoTrue();
     }
 
     public Optional<Demanda> getById (Long id){
-        return this.demandaRepository.findById(id);
+        return this.demandaRepository.findByIdAtivoTrue(id);
     }
 
     public Demanda inserir (Demanda demanda){
@@ -63,7 +63,7 @@ public class DemandaService {
          if (demandaExiste == null){
              throw new Exception("Demanda não encontrada");
          } else {
-             this.demandaRepository.delete(demandaExiste);
+             this.demandaRepository.setAtivoFalse(demandaExiste.getId());
          }
 
     }
