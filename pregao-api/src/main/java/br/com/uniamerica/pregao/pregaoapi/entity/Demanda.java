@@ -35,14 +35,14 @@ public class Demanda extends AbstractEntity {
     private Empresa demandante;
 
     @Getter @Setter
-//    @JoinColumn(name = "id_demanda", nullable = false)
+    // @JoinColumn(name = "id_demanda", nullable = false)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<HistoricoAtualizacaoStatusDemanda> historicoAtualizacao;
 
     @Getter @Setter
     @JoinTable(name = "tb_demanda_area_atuacao", schema = "pregao",
             joinColumns = {@JoinColumn(name = "id_demandas", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_areas_atuacoes", referencedColumnName = "id", nullable = false)})
+            inverseJoinColumns = {@JoinColumn(name = "id_area_atuacao", referencedColumnName = "id", nullable = false)})
     @ManyToMany
-    private Set<AreaAtuacao> areas_atuacoes;
+    private Set<AreaAtuacao> areasAtuacao;
 }

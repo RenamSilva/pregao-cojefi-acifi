@@ -16,10 +16,10 @@ public class AreaAtuacao extends AbstractEntity {
     private String nome;
 
     @Getter @Setter
-    @ManyToMany(mappedBy = "areas_atuacoes")
+    @ManyToMany(mappedBy = "areasAtuacao")
     private Set<Demanda> demanda;
 
     @Getter @Setter
-    @ManyToMany(mappedBy = "areas_atuacoes")
+    @ManyToMany(mappedBy = "areasAtuacao")
     private Set<Empresa> empresas;
 }
