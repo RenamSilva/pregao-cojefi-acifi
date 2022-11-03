@@ -46,7 +46,7 @@ public class Empresa extends AbstractEntity {
     @Getter @Setter
     @JoinTable(name = "tb_empresa_area_atuacao", schema = "pregao",
             joinColumns = {@JoinColumn(name = "id_empresas", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_areas_atuacoes", referencedColumnName = "id", nullable = false)})
+            inverseJoinColumns = {@JoinColumn(name = "id_areas_atuacao", referencedColumnName = "id", nullable = false)})
     @ManyToMany
-    private Set<AreaAtuacao> areas_atuacoes;
+    private Set<AreaAtuacao> areasAtuacao;
 }
