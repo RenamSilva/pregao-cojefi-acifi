@@ -1,5 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(value= {"handler","hibernateLazyInitializer","FieldHandler"})
 @Table(name = "tb_demandas", schema = "pregao")
 public class Demanda extends AbstractEntity {
 
@@ -26,14 +28,15 @@ public class Demanda extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private StatusDemanda status;
 
+
     @Getter @Setter
     @JoinColumn(name = "id_demandante", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Empresa demandante;
 
     @Getter @Setter
-    @JoinColumn(name = "id_demanda", nullable = false)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "id_demanda", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<HistoricoAtualizacaoStatusDemanda> historicoAtualizacao;
 
     @Getter @Setter

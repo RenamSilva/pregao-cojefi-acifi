@@ -18,7 +18,7 @@ public class PropostaService {
    public List<Proposta> findAll(){ return this.propostaRepository.findAll();}
 
 
-    public Optional<Proposta> getById(Long id){return this.propostaRepository.findById(id);}
+    public Optional<Proposta> getById(Long id){return this.propostaRepository.findByIdAtivoTrue(id);}
 
     public Proposta inserir (Proposta proposta){
        return this.propostaRepository.save(proposta);
@@ -42,7 +42,9 @@ public class PropostaService {
        if (propostaDelete == null){
            throw new Exception("Proposta não existente");
        } else {
-           this.propostaRepository.delete(propostaDelete);
+           this.propostaRepository.setAtivoFalse(propostaDelete.getId());
        }
     }
+
+
 }

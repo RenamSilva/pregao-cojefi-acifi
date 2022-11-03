@@ -1,5 +1,7 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import br.com.uniamerica.pregao.pregaoapi.helper.CustomLocalDateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +17,11 @@ public abstract class AbstractEntity {
     private Long id;
 
     @Getter @Setter
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     private LocalDateTime dataCadastro;
+
     @Getter @Setter
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     private LocalDateTime dataAtualizado;
     @Getter @Setter
     private boolean ativo;

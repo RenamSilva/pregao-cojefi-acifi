@@ -1,5 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value= {"handler","hibernateLazyInitializer","FieldHandler"})
 @Table(name = "tb_contatos", schema = "pregao")
 public class Contato extends AbstractEntity {
     @Getter @Setter
@@ -20,5 +22,10 @@ public class Contato extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", unique = false, nullable = false)
     private TipoContato tipo;
-}
 
+    @Getter @Setter
+    @ManyToOne()
+    @JoinColumn(name = "id_empresa")
+    private Empresa empresa;
+
+}

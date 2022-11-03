@@ -71,10 +71,10 @@ public class DemandaController {
         }
     }
 
-    @PutMapping("/aberto/{id}")
-    public ResponseEntity<String> atualizarStatusAberto (@PathVariable final Long id){
+    @PutMapping("/aberto/{id}/{idUsuario}")
+    public ResponseEntity<String> atualizarStatusAberto (@PathVariable final Long id, @PathVariable final Long idUsuario){
         try{
-            this.demandaService.atualizarStatusDemanda(id, StatusDemanda.ABERTO);
+            this.demandaService.atualizarStatusDemanda(id, idUsuario, StatusDemanda.ABERTO);
             return ResponseEntity.status(202).body("Satus atualizado com sucesso");
         }
         catch (Exception e){
@@ -82,10 +82,10 @@ public class DemandaController {
         }
     }
 
-    @PutMapping("/atendido/{id}")
-    public ResponseEntity<String> atualizarStatusAtendido (@PathVariable final Long id){
+    @PutMapping("/atendido/{id}/{idUsuario}")
+    public ResponseEntity<String> atualizarStatusAtendido (@PathVariable final Long id, @PathVariable final Long idUsuario){
         try{
-            this.demandaService.atualizarStatusDemanda(id, StatusDemanda.ATENDIDO);
+            this.demandaService.atualizarStatusDemanda(id, idUsuario, StatusDemanda.ATENDIDO);
             return ResponseEntity.status(202).body("Satus atualizado com sucesso");
         }
         catch (Exception e){
@@ -93,10 +93,10 @@ public class DemandaController {
         }
     }
 
-    @PutMapping("/encerrado/{id}")
-    public ResponseEntity<String> atualizarStatusEncerrado (@PathVariable final Long id){
+    @PutMapping("/encerrado/{id}/{idUsuario}")
+    public ResponseEntity<String> atualizarStatusEncerrado (@PathVariable final Long id, @PathVariable final Long idUsuario){
         try{
-            this.demandaService.atualizarStatusDemanda(id, StatusDemanda.ENCERRADO);
+            this.demandaService.atualizarStatusDemanda(id, idUsuario, StatusDemanda.ENCERRADO);
             return ResponseEntity.status(202).body("Satus atualizado com sucesso");
         }
         catch (Exception e){
@@ -104,10 +104,10 @@ public class DemandaController {
         }
     }
 
-    @PutMapping("/excluido/{id}")
-    public ResponseEntity<String> atualizarStatusExcluido (@PathVariable final Long id){
+    @PutMapping("/excluido/{id}/{idUsuario}")
+    public ResponseEntity<String> atualizarStatusExcluido (@PathVariable final Long id, @PathVariable final Long idUsuario){
         try{
-            this.demandaService.atualizarStatusDemanda(id, StatusDemanda.EXCLUIDO);
+            this.demandaService.atualizarStatusDemanda(id, idUsuario, StatusDemanda.EXCLUIDO);
             return ResponseEntity.status(202).body("Satus atualizado com sucesso");
         }
         catch (Exception e){
