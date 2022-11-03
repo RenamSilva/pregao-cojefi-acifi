@@ -12,15 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_empresas_visualizacoes_demandas", schema = "pregao")
-public class EmpresaVisualizacaoDemanda {
-    @Id
-    @Getter @Setter
-    private Long id;
-
-    @Getter @Setter
-    @Column(name = "data_cadastro", unique = false, nullable = false)
-    private LocalDate DataCadastro;
-
+public class EmpresaVisualizacaoDemanda extends AbstractEntity {
     @Getter @Setter
     @JoinColumn(name = "id_empresa", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

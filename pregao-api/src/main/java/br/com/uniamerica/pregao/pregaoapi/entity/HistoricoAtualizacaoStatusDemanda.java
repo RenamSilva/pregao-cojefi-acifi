@@ -12,16 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tb_historicosAtualizacaoStatusDemandas", schema = "pregao")
-public class HistoricoAtualizacaoStatusDemanda {
-
-    @Id
-    @Getter @Setter
-    @Column(name = "id", length = 25, nullable = false, unique = true)
-    private Long id;
-
-    @Getter @Setter
-    @Column(name = "dataCadastro", nullable = false, scale = 3, precision = 6)
-    private LocalDateTime dataCadastro;
+public class HistoricoAtualizacaoStatusDemanda extends AbstractEntity {
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)
@@ -32,8 +23,9 @@ public class HistoricoAtualizacaoStatusDemanda {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Usuario usuario;
 
-    @PrePersist
-    public void dataDataCadastro(){
-        this.setDataCadastro(LocalDateTime.now());
-    }
+    @Getter @Setter
+    @ManyToOne()
+    @JoinColumn(name = "id_demanda")
+    private Demanda demanda;
+
 }

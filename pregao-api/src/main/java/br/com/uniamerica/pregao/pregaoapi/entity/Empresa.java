@@ -1,5 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,9 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value= {"handler","hibernateLazyInitializer","FieldHandler"})
 @Table(name = "tb_empresas", schema = "pregao")
-public class Empresa {
-    @Id
-    @Getter @Setter
-    private Long id;
+public class Empresa extends AbstractEntity {
 
     @Getter @Setter
     @Column(name = "nome", length = 64, unique = false, nullable = false)
@@ -25,14 +24,6 @@ public class Empresa {
     @Getter @Setter
     @Column(name = "cnpj", length = 15, unique = true, nullable = false)
     private String cnpj;
-
-    @Getter @Setter
-    @Column(name = "data_atualizacao", unique = false, nullable = false)
-    private LocalDate dataAtualizacao;
-
-    @Getter @Setter
-    @Column(name = "data_cadastro", unique = false, nullable = false)
-    private String dataCadastro;
 
     @Getter @Setter
     @Column(name = "imagem", length = 255, unique = false, nullable = true)
@@ -45,7 +36,7 @@ public class Empresa {
 
     @Getter @Setter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_empresa", nullable = false)
+//    @JoinColumn(name = "id_empresa", nullable = false)
     private Set<Contato> contatos;
 
     @Getter @Setter
