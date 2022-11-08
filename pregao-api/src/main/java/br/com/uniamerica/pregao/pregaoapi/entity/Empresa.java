@@ -1,5 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,8 +46,18 @@ public class Empresa extends AbstractEntity {
 
     @Getter @Setter
     @JoinTable(name = "tb_empresa_area_atuacao", schema = "pregao",
-            joinColumns = {@JoinColumn(name = "id_empresas", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_areas_atuacao", referencedColumnName = "id", nullable = false)})
+            joinColumns = {
+                @JoinColumn(
+                        name = "id_empresas",
+                        referencedColumnName = "id"
+                )
+            },
+            inverseJoinColumns = {
+                @JoinColumn(
+                        name = "id_areas_atuacao",
+                        referencedColumnName = "id"
+                )
+            })
     @ManyToMany
     private Set<AreaAtuacao> areasAtuacao;
 }
