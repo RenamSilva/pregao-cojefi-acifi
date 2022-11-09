@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -28,4 +29,9 @@ public class Usuario extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", unique = false, nullable = false)
     private TipoUsuario tipo;
+
+    @Getter @Setter
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Empresa empresa;
 }

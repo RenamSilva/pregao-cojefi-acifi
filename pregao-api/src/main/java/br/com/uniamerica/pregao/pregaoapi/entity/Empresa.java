@@ -36,13 +36,8 @@ public class Empresa extends AbstractEntity {
 
     @Getter @Setter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_empresa", nullable = false)
+    // @JoinColumn(name = "id_empresa", nullable = false)
     private Set<Contato> contatos;
-
-    @Getter @Setter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_empresa", nullable = false)
-    private Set<Usuario> usuarios;
 
     @Getter @Setter
     @JoinTable(name = "tb_empresa_area_atuacao", schema = "pregao",

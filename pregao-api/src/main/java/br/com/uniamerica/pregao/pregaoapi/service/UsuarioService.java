@@ -18,8 +18,8 @@ public class UsuarioService {
         return this.usuarioRepository.findByAtivoTrue();
     }
 
-    public Usuario findById(Long id) {
-        return this.usuarioRepository.findById(id).orElse(new Usuario());
+    public Usuario findByIdAndAtivoTrue(Long id) {
+        return this.usuarioRepository.findByIdAndAtivoTrue(id);
     }
 
     public Usuario save(Usuario usuario) {

@@ -15,6 +15,9 @@ import java.util.List;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     public List<Usuario> findByAtivoTrue();
 
+    @Query("FROM Usuario WHERE ativo = true AND id = :id")
+    public Usuario findByIdAndAtivoTrue(@Param("id") final Long id);
+
     @Modifying
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
     @Query("UPDATE FROM Usuario SET ativo = false WHERE id = :id")
