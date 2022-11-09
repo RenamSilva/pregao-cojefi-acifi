@@ -94,4 +94,14 @@ public class ContatoController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        try {
+            this.contatoService.setAtivoFalse(id);
+            return ResponseEntity.ok().body("Contato Excluido com Sucesso.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
