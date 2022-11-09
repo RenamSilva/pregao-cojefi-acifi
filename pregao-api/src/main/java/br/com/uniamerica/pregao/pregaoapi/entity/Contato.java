@@ -1,5 +1,7 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +26,8 @@ public class Contato extends AbstractEntity {
     private TipoContato tipo;
 
     @Getter @Setter
-    @ManyToOne()
-    @JoinColumn(name = "id_empresa")
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_empresa", nullable = false)
     private Empresa empresa;
-
 }

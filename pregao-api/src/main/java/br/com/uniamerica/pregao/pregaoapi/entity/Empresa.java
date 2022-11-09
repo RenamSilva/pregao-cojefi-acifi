@@ -1,13 +1,14 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,9 +36,9 @@ public class Empresa extends AbstractEntity {
     private StatusEmpresa status;
 
     @Getter @Setter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // @JoinColumn(name = "id_empresa", nullable = false)
-    private Set<Contato> contatos;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "empresa")
+    private List<Contato> contatos;
 
     @Getter @Setter
     @JoinTable(name = "tb_empresa_area_atuacao", schema = "pregao",

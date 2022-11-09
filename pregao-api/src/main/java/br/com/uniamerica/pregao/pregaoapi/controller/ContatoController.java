@@ -19,7 +19,6 @@ public class ContatoController {
     @Autowired
     private ContatoService contatoService;
 
-
     @GetMapping
     public ResponseEntity<?> listAll() {
         try {
