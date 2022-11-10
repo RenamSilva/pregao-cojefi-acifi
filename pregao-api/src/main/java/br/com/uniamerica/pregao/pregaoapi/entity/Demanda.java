@@ -1,6 +1,7 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Demanda extends AbstractEntity {
     private StatusDemanda status;
 
     @Getter @Setter
+    @JsonIgnore
     // @JoinColumn(name = "id_demanda", nullable = false)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<HistoricoAtualizacaoStatusDemanda> historicoAtualizacao;
