@@ -16,22 +16,29 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmpresaService {
+    private void filterNotActiveClasses(Empresa empresa) {
+        Set<AreaAtuacao> activeAreasAtuacao = empresa.getAreasAtuacao().stream().filter(areaAtuacao -> areaAtuacao.isAtivo()).collect(Collectors.toSet());
+        List<Contato> activeContatos = empresa.getContatos().stream().filter(contato -> contato.isAtivo()).collect(Collectors.toList());
+        List<Demanda> activeDemandas = empresa.getDemandas().stream().filter(demanda -> demanda.isAtivo()).collect(Collectors.toList());
+
+        empresa.setAreasAtuacao(activeAreasAtuacao);
+        empresa.setContatos(activeContatos);
+        empresa.setDemandas(activeDemandas);
+    }
+
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    public Empresa findByIdAndAtivoTrue(Long id) {
+        Empresa empresa = this.empresaRepository.findById(id).orElse(new Empresa());
+        filterNotActiveClasses(empresa);
+
+        return empresa;
+    }
+
     public List<Empresa> findByAtivoTrueAndContatoAtivoTrue() {
-
         final List<Empresa> empresas = this.empresaRepository.findByAtivoTrue();
-
-        empresas.forEach(empresa -> {
-            Set<AreaAtuacao> activeAreasAtuacao = empresa.getAreasAtuacao().stream().filter(areaAtuacao -> areaAtuacao.isAtivo()).collect(Collectors.toSet());
-            List<Contato> activeContatos = empresa.getContatos().stream().filter(contato -> contato.isAtivo()).collect(Collectors.toList());
-            List<Demanda> activeDemandas = empresa.getDemandas().stream().filter(demanda -> demanda.isAtivo()).collect(Collectors.toList());
-
-            empresa.setAreasAtuacao(activeAreasAtuacao);
-            empresa.setContatos(activeContatos);
-            empresa.setDemandas(activeDemandas);
-        });
+        empresas.forEach(empresa -> filterNotActiveClasses(empresa));
 
         return empresas;
     }

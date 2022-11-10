@@ -1,9 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.service;
 
-import br.com.uniamerica.pregao.pregaoapi.entity.Demanda;
-import br.com.uniamerica.pregao.pregaoapi.entity.HistoricoAtualizacaoStatusDemanda;
-import br.com.uniamerica.pregao.pregaoapi.entity.StatusDemanda;
-import br.com.uniamerica.pregao.pregaoapi.entity.Usuario;
+import br.com.uniamerica.pregao.pregaoapi.entity.*;
 import br.com.uniamerica.pregao.pregaoapi.repository.DemandaRepository;
 import br.com.uniamerica.pregao.pregaoapi.repository.EmpresaRepository;
 import br.com.uniamerica.pregao.pregaoapi.repository.UsuarioRepository;
@@ -12,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class DemandaService {
@@ -19,16 +18,21 @@ public class DemandaService {
     private DemandaRepository demandaRepository;
 
     @Autowired
-    private EmpresaRepository empresaRepository;
-
-    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
     private HistoricoAtualizacaoStatusDemandaService historicoAtualizacaoStatusDemandaService;
 
-    public List<Demanda> listAll (){
-        return this.demandaRepository.findByAtivoTrue();
+    public List<Demanda> listAll () {
+        final List<Demanda> demandas = this.demandaRepository.findByAtivoTrue();
+
+        demandas.forEach(demanda -> {
+            Set<AreaAtuacao> activeAreasAtuacao = demanda.getAreasAtuacao().stream().filter(AbstractEntity::isAtivo).collect(Collectors.toSet());
+
+            demanda.setAreasAtuacao(activeAreasAtuacao);
+        });
+
+        return demandas;
     }
 
     public Optional<Demanda> getById (Long id){

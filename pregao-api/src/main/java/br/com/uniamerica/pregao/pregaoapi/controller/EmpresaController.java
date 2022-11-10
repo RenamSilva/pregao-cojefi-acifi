@@ -22,7 +22,7 @@ public class EmpresaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(this.empresaService.findById(id));
+        return ResponseEntity.ok().body(this.empresaService.findByIdAndAtivoTrue(id));
     }
 
     @PostMapping

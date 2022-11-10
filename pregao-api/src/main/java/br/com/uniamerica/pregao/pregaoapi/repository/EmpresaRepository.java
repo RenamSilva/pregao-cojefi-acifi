@@ -14,6 +14,9 @@ import java.util.List;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
+    @Query("FROM Empresa WHERE ativo = true AND id = :id")
+    public Empresa findByIdAndAtivoTrue(@Param("id") final Long id);
+
     public List<Empresa> findByAtivoTrue();
 
     @Modifying
