@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/api/demanda")
+@RequestMapping("/api/demandas")
 public class DemandaController {
 
     @Autowired

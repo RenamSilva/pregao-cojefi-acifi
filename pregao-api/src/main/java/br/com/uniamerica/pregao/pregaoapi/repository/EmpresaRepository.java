@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
+
     public List<Empresa> findByAtivoTrue();
 
     @Modifying

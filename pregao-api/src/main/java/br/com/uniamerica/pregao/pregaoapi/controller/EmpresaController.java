@@ -17,7 +17,7 @@ public class EmpresaController {
 
     @GetMapping
     public ResponseEntity<List<Empresa>> findAll() {
-        return ResponseEntity.ok().body(this.empresaService.findByAtivoTrue());
+        return ResponseEntity.ok().body(this.empresaService.findByAtivoTrueAndContatoAtivoTrue());
     }
 
     @GetMapping("/{id}")

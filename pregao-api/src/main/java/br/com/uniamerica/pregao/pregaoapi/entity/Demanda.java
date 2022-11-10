@@ -1,5 +1,6 @@
 package br.com.uniamerica.pregao.pregaoapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,12 +29,6 @@ public class Demanda extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private StatusDemanda status;
 
-
-    @Getter @Setter
-    @JoinColumn(name = "id_demandante", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Empresa demandante;
-
     @Getter @Setter
     // @JoinColumn(name = "id_demanda", nullable = false)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -45,4 +40,10 @@ public class Demanda extends AbstractEntity {
             inverseJoinColumns = {@JoinColumn(name = "id_area_atuacao", referencedColumnName = "id", nullable = false)})
     @ManyToMany
     private Set<AreaAtuacao> areasAtuacao;
+
+    @Getter @Setter
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Empresa empresa;
 }

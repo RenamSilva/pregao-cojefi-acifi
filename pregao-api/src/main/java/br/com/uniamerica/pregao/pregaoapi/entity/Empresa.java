@@ -41,6 +41,11 @@ public class Empresa extends AbstractEntity {
     private List<Contato> contatos;
 
     @Getter @Setter
+    @JsonManagedReference
+    @OneToMany(mappedBy = "empresa")
+    private List<Demanda> demandas;
+
+    @Getter @Setter
     @JoinTable(name = "tb_empresa_area_atuacao", schema = "pregao",
             joinColumns = {
                 @JoinColumn(

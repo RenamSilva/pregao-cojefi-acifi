@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @Controller
-@RequestMapping("api/contato")
+@RequestMapping("api/contatos")
 public class ContatoController {
 
     @Autowired
