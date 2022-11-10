@@ -18,16 +18,33 @@ public class AreaAtuacaoService {
         return this.areaAtuacaoRepository.findByAtivoTrue();
     }
 
-    public AreaAtuacao findById(Long id) {
-        return this.areaAtuacaoRepository.findById(id).orElse(new AreaAtuacao());
+    public AreaAtuacao findById(Long id) throws Exception {
+        AreaAtuacao areaAtuacaoExiste = this.areaAtuacaoRepository.findByAtivoTrueAndId(id).orElse(null);
+
+        if(areaAtuacaoExiste == null){
+            throw new Exception("Area atuacao nao encontrada");
+        }
+
+        return areaAtuacaoExiste;
     }
 
-    public AreaAtuacao save(AreaAtuacao areaAtuacao) {
+    public AreaAtuacao save(AreaAtuacao areaAtuacao) throws Exception {
+        AreaAtuacao areaAtuacaoExiste = this.areaAtuacaoRepository.findByAtivoTrueAndName(areaAtuacao.getNome()).orElse(null);
+
+        if(areaAtuacaoExiste != null){
+            throw new Exception("Area atuacao ja existe");
+        }
+
         return this.areaAtuacaoRepository.save(areaAtuacao);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
-    public void update(Long id, AreaAtuacao areaAtuacao) {
+    public void update(Long id, AreaAtuacao areaAtuacao) throws Exception{
+        AreaAtuacao areaAtuacaoExiste = this.areaAtuacaoRepository.findByAtivoTrueAndId(id).orElse(null);
+        if(areaAtuacaoExiste == null){
+            throw new Exception("Area atuacao nao encontrada");
+        }
+
         this.areaAtuacaoRepository.update(id, areaAtuacao.getNome());
     }
 

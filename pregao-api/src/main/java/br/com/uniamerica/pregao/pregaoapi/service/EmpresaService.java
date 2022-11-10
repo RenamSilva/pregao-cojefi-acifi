@@ -29,8 +29,11 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    public Empresa findByIdAndAtivoTrue(Long id) {
-        Empresa empresa = this.empresaRepository.findById(id).orElse(new Empresa());
+    public Empresa findByIdAndAtivoTrue(Long id) throws Exception{
+        Empresa empresa = this.empresaRepository.findByIdAndAtivoTrue(id).orElse(null);
+        if(empresa == null){
+            throw new Exception("Cnpj nao encontrado");
+        }
         filterNotActiveClasses(empresa);
 
         return empresa;
@@ -47,12 +50,21 @@ public class EmpresaService {
         return this.empresaRepository.findById(id).orElse(new Empresa());
     }
 
-    public Empresa save(Empresa empresa) {
-        return this.empresaRepository.save(empresa);
+    public Empresa save(Empresa empresa) throws Exception {
+        Empresa empresaExiste = this.empresaRepository.findByCnpjAndAtivoTrue(empresa.getCnpj()).orElse(null);
+        if (empresaExiste != null){
+            throw new Exception("Cnpj ja cadastrado");
+        } else {
+            return this.empresaRepository.save(empresa);
+        }
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
-    public void update(Long id, Empresa empresa) {
+    public void update(Long id, Empresa empresa)  throws Exception {
+        Empresa empresaExiste = this.empresaRepository.findByIdAndAtivoTrue(id).orElse(null);
+        if(empresaExiste == null){
+            throw new Exception("Cnpj nao encontrado");
+        }
         this.empresaRepository.update(id, empresa.getNome());
     }
 

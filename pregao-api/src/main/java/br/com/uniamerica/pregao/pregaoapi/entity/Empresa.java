@@ -23,7 +23,7 @@ public class Empresa extends AbstractEntity {
     private String nome;
 
     @Getter @Setter
-    @Column(name = "cnpj", length = 15, unique = true, nullable = false)
+    @Column(name = "cnpj", length = 20, unique = true, nullable = false)
     private String cnpj;
 
     @Getter @Setter

@@ -10,13 +10,17 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     public List<Usuario> findByAtivoTrue();
 
     @Query("FROM Usuario WHERE ativo = true AND id = :id")
-    public Usuario findByIdAndAtivoTrue(@Param("id") final Long id);
+    public Optional<Usuario> findByIdAndAtivoTrue(@Param("id") final Long id);
+
+    @Query("FROM Usuario WHERE ativo = true AND email = :email")
+    public Optional<Usuario> findByEmailAndAtivoTrue(@Param("email") final String email);
 
     @Modifying
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)

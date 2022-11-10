@@ -10,14 +10,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
     @Query("FROM Empresa WHERE ativo = true AND id = :id")
-    public Empresa findByIdAndAtivoTrue(@Param("id") final Long id);
+    public Optional<Empresa> findByIdAndAtivoTrue(@Param("id") final Long id);
 
     public List<Empresa> findByAtivoTrue();
+
+    @Transactional()
+    @Query(value = "SELECT * FROM pregao.tb_empresas WHERE cnpj = :cnpj AND ativo = true", nativeQuery = true)
+    public Optional<Empresa> findByCnpjAndAtivoTrue(@Param("cnpj") final String cnpj);
 
     @Modifying
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)

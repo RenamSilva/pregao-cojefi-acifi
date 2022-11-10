@@ -22,7 +22,11 @@ public class AreaAtuacaoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(this.areaAtuacaoService.findById(id));
+        try {
+            return ResponseEntity.ok().body(this.areaAtuacaoService.findById(id));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping

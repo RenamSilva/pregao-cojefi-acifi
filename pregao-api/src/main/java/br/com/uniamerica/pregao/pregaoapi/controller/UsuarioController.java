@@ -22,7 +22,11 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(this.usuarioService.findByIdAndAtivoTrue(id));
+        try{
+            return ResponseEntity.ok().body(this.usuarioService.findByIdAndAtivoTrue(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping
