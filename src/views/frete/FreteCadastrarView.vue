@@ -14,8 +14,6 @@
 
             <input class="input" type="text" placeholder="Cidade Destino" />
 
-
-
             <div class="select">
                 <select>
                     <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
