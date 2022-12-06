@@ -1,9 +1,9 @@
 import { StatusFrete } from "../Enum/StatusFrete"
 import { AbstractEntity } from "./AbstractEntity"
-import { Caminhao } from "./Caminhao"
-import { Cidade } from "./Cidade"
-import { Produto } from "./Produto"
-import { Usuario } from "./Usuario"
+import { Caminhao } from "@/model/Class/Caminhao"
+import { Cidade } from "@/model/Class/Cidade"
+import { Produto } from "@/model/Class/Produto"
+import { Usuario } from "@/model/Class/Usuario"
 
 export class Frete extends AbstractEntity {
 

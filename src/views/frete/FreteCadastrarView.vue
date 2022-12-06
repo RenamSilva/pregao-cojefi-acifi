@@ -10,37 +10,41 @@
         <div class="Inpts">
 
 
-            <input class="input" type="text" v-model="frete.cidadeOrigem.id" placeholder="Cidade Origem" />
+            <input class="input" type="text" placeholder="Cidade Origem" />
 
-            <input class="input" type="text" v-model="frete.cidadeDesino.id" placeholder="Cidade Destino" />
+            <input class="input" type="text" placeholder="Cidade Destino" />
 
 
 
             <div class="select">
                 <select>
-                    <option>Select dropdown</option>
-                    <option>With options</option>
+                    <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
                 </select>
+
             </div>
-
-            <input class="input" type="text" v-model="frete.produto.id" placeholder="Produto" />
-
-            <input class="input" type="text" v-model="frete.caminhao.id" placeholder="Caminhão" />
-
-            <input class="input" type="text" v-model="frete.motorista.id" placeholder="Motorista" />
-
-            <input class="input" type="text" v-model="frete.precoTonelada" placeholder="Preço por Tonelada" />
-
-
-
-
 
 
         </div>
+
+        <!-- <input class="input" type="text" v-model="frete.produto.id" placeholder="Produto" />
+
+        <input class="input" type="text" v-model="frete.caminhao.id" placeholder="Caminhão" />
+
+        <input class="input" type="text" v-model="frete.motorista.id" placeholder="Motorista" />
+
+        <input class="input" type="text" v-model="frete.precoTonelada" placeholder="Preço por Tonelada" />
+ -->
+
+
+
 
         <div class="Buttons">
             <button @click="onClickCadastrar()">Cadastrar</button>
         </div>
+
+
+
+
 
     </div>
 
@@ -55,7 +59,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { FreteClient } from '@/model/Client/Frete.client'
 import { Frete } from '@/model/Class/Frete'
-import { Route } from 'vue-router'
+// import { Route } from 'vue-router'
 import { Produto } from '@/model/Class/Produto'
 import { ProdutoClient } from '@/model/Client/Produto.client'
 
@@ -77,7 +81,6 @@ export default class FreteCadastrarView extends Vue {
 
     public onClickCadastrar(): void {
 
-        // debugger
 
         this.freteClient.cadastrar(this.frete).then(
             success => {
@@ -93,8 +96,7 @@ export default class FreteCadastrarView extends Vue {
 
     private selectProdutoList(): void {
         this.produtoClient.findAll().then(
-            success =>
-                this.produtoList = success,
+            success => this.produtoList = success,
             error => console.log(error)
         )
 

@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from "axios"
-import { Produto } from "../Class/Produto"
+import axios, { AxiosInstance } from "axios";
+import { Produto } from "@/model/Class/Produto";
 
 export class ProdutoClient {
 
