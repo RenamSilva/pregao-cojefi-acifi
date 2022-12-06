@@ -1,4 +1,4 @@
-import { Estado } from "../Enum/Estado"
+import { Estado } from "./Estado"
 import { AbstractEntity } from "./AbstractEntity"
 
 

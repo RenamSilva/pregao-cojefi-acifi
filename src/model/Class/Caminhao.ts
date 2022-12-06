@@ -1,4 +1,4 @@
-import { Cor } from "../Enum/Cor"
+import { Cor } from "./Enum/Cor"
 import { AbstractEntity } from "./AbstractEntity"
 
 import { Modelo } from "./Modelo"

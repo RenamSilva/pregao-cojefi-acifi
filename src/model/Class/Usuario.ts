@@ -1,4 +1,4 @@
-import { Grupo } from "../Enum/Grupo"
+import { Grupo } from "./Enum/Grupo"
 import { AbstractEntity } from "./AbstractEntity"
 
 

@@ -1,4 +1,4 @@
-import { StatusFrete } from "../Enum/StatusFrete"
+import { StatusFrete } from "./Enum/StatusFrete"
 import { AbstractEntity } from "./AbstractEntity"
 import { Caminhao } from "@/model/Class/Caminhao"
 import { Cidade } from "@/model/Class/Cidade"

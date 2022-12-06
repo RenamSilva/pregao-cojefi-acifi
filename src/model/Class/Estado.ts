@@ -1,4 +1,4 @@
-import { AbstractEntity } from "../Class/AbstractEntity"
+import { AbstractEntity } from "./AbstractEntity"
 
 export class Estado extends AbstractEntity {
 

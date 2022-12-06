@@ -10,16 +10,25 @@
         <div class="Inpts">
 
 
-            <input class="input" type="text" placeholder="Cidade Origem" />
-
-            <input class="input" type="text" placeholder="Cidade Destino" />
-
-            <div class="select">
-                <select>
+            <div class="select is-fullwidith">
+                <select value="">
                     <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
                 </select>
 
             </div>
+
+            <input class="input" type="text" placeholder="Cidade Origem" />
+
+            <input class="input" type="text" placeholder="Cidade Destino" />
+
+            <div class="select is-fullwidith">
+                <select>
+                    <option selected hidden="true">Selecione um Produto</option>
+                    <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
+                </select>
+
+            </div>
+
 
 
         </div>
@@ -33,21 +42,10 @@
         <input class="input" type="text" v-model="frete.precoTonelada" placeholder="Preço por Tonelada" />
  -->
 
-
-
-
         <div class="Buttons">
             <button @click="onClickCadastrar()">Cadastrar</button>
         </div>
-
-
-
-
-
     </div>
-
-
-
 
 </template>
 
@@ -60,6 +58,10 @@ import { Frete } from '@/model/Class/Frete'
 // import { Route } from 'vue-router'
 import { Produto } from '@/model/Class/Produto'
 import { ProdutoClient } from '@/model/Client/Produto.client'
+import { CidadeClient } from '@/model/Client/Cidade.client'
+import { Cidade } from '@/model/Class/Cidade'
+import { EstadoClient } from '@/model/Client/Estado.client'
+
 
 
 @Component
@@ -68,10 +70,12 @@ export default class FreteCadastrarView extends Vue {
 
     private freteClient: FreteClient = new FreteClient()
     private produtoClient: ProdutoClient = new ProdutoClient()
-
+    private cidadeClient: CidadeClient = new CidadeClient()
+    private estadoClient: EstadoClient = new EstadoClient()
 
     public frete: Frete = new Frete()
     public produtoList: Produto[] = []
+    public cidadesList: Cidade[] = []
 
     public mounted(): void {
         this.selectProdutoList();
