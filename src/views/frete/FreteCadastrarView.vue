@@ -229,7 +229,7 @@ export default class FreteCadastrarView extends Vue {
         )
     }
 
-    private selectCidadeList(id: number): void {
+    public selectCidadeList(id: number): void {
         this.cidadeClient.findByEstado(id).then(
             success => this.cidadesList = success,
             error => console.log(error)
@@ -237,6 +237,16 @@ export default class FreteCadastrarView extends Vue {
 
         console.log(this.cidadesList)
     }
+
+    // private selectCidadeList(id: number): void {
+    //     this.cidadeClient.findByEstado(id).then(
+    //         success => this.cidadesList = success,
+    //         error => console.log(error)
+    //     )
+
+    //     console.log(this.cidadesList)
+    // }
+
 
     private selectCaminhaoList(): void {
         this.caminhaoClient.findAll().then(
@@ -256,10 +266,6 @@ export default class FreteCadastrarView extends Vue {
         if (id == null) {
             return
         }
-
-
-
-
     }
 
 

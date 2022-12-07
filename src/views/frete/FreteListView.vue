@@ -116,6 +116,14 @@ export default class FreteListView extends Vue {
 </script>
 
 <style>
+.colum {
+    display: flex;
+    justify-content: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
 .tabela {
     border: 3px solid black;
     border-radius: 25px;

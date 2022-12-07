@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="ANA JULKIA SANTIAGO" />
+    <HelloWorld msg="TRANSPORTADORA" />
   </div>
 </template>
 
