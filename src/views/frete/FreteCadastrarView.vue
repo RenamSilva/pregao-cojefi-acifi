@@ -1,49 +1,108 @@
 <template>
-    <div>
+    <div class="colums">
 
         <div class="colums">
             <div class="colum">
-                Cadastrar
+                Cadastrar Frete
             </div>
         </div>
 
-        <div class="Inpts">
+        <div class="paidetodas">
+            <div class="Inpts">
 
 
-            <div class="select is-fullwidith">
-                <select value="">
-                    <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
-                </select>
+
+                <div class="OrdenandoCadastro">
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Estado Origem</option>
+                            <option v-for="item in estadoList" :key="item.id" @click="estadoSelecionado(item.id)"> {{
+                                    item.nome
+                            }}
+                            </option>
+                        </select>
+
+
+
+
+                    </div>
+
+
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Cidade Origem</option>
+                            <option v-for="item in cidadesList" :key="item.id"> {{ item.nome }}</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Estado Destino</option>
+                            <option v-for="item in estadoList" :key="item.id" @click="estadoSelecionado(item.id)"> {{
+                                    item.nome
+                            }}
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Cidade Destino</option>
+                            <option v-for="item in cidadesList" :key="item.id"> {{ item.nome }}</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="OrdenandoCadastro">
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Selecione um Produto</option>
+                            <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
+                        </select>
+
+                    </div>
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Selecione um Caminhao</option>
+                            <option v-for="item in caminhaoList" :key="item.id"> {{ item.placa }}</option>
+                        </select>
+                    </div>
+
+                    <div class="select is-fullwidith">
+                        <select>
+                            <option selected hidden="true">Selecione um Motorista</option>
+                            <option v-for="item in usuarioList" :key="item.id"> {{ item.nome }}</option>
+                        </select>
+                    </div>
+
+                    <input class="input" type="number" v-model="frete.precoTonelada" placeholder="Preço por Tonelada" />
+
+                </div>
+
+
 
             </div>
 
-            <input class="input" type="text" placeholder="Cidade Origem" />
-
-            <input class="input" type="text" placeholder="Cidade Destino" />
-
-            <div class="select is-fullwidith">
-                <select>
-                    <option selected hidden="true">Selecione um Produto</option>
-                    <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}</option>
-                </select>
-
-            </div>
+            <!-- <div class="classeButoes">
+                <div class="Buttons">
+                    <button @click="onClickCadastrar()">Cadastrar</button>
+                </div>
 
 
+                <div class="Buttons">
+                    <a href="/frete"><button>Voltar</button></a>
+                </div>
 
-        </div>
-
-        <!-- <input class="input" type="text" v-model="frete.produto.id" placeholder="Produto" />
-
-        <input class="input" type="text" v-model="frete.caminhao.id" placeholder="Caminhão" />
-
-        <input class="input" type="text" v-model="frete.motorista.id" placeholder="Motorista" />
-
-        <input class="input" type="text" v-model="frete.precoTonelada" placeholder="Preço por Tonelada" />
- -->
-
-        <div class="Buttons">
-            <button @click="onClickCadastrar()">Cadastrar</button>
+            </div> -->
         </div>
     </div>
 
@@ -61,6 +120,12 @@ import { ProdutoClient } from '@/model/Client/Produto.client'
 import { CidadeClient } from '@/model/Client/Cidade.client'
 import { Cidade } from '@/model/Class/Cidade'
 import { EstadoClient } from '@/model/Client/Estado.client'
+import { Estado } from '@/model/Class/Estado'
+import { Caminhao } from '@/model/Class/Caminhao'
+import { CaminhaoClient } from '@/model/Client/Caminhao.client'
+import { UsuarioClient } from '@/model/Client/Usuario.client'
+import { Usuario } from '@/model/Class/Usuario'
+
 
 
 
@@ -72,13 +137,22 @@ export default class FreteCadastrarView extends Vue {
     private produtoClient: ProdutoClient = new ProdutoClient()
     private cidadeClient: CidadeClient = new CidadeClient()
     private estadoClient: EstadoClient = new EstadoClient()
+    private caminhaoClient: CaminhaoClient = new CaminhaoClient()
+    private usuarioClient: UsuarioClient = new UsuarioClient()
 
     public frete: Frete = new Frete()
     public produtoList: Produto[] = []
     public cidadesList: Cidade[] = []
+    public estadoList: Estado[] = []
+    public caminhaoList: Caminhao[] = []
+    public usuarioList: Usuario[] = []
+
 
     public mounted(): void {
         this.selectProdutoList();
+        this.selectEstadoList();
+        this.selectCaminhaoList();
+        this.selectUsuarioList();
     }
 
     public onClickCadastrar(): void {
@@ -103,21 +177,100 @@ export default class FreteCadastrarView extends Vue {
         )
 
     }
+
+    private selectEstadoList(): void {
+        this.estadoClient.findAll().then(
+            success => this.estadoList = success,
+            error => console.log(error)
+        )
+    }
+
+    private selectCidadeList(id: number): void {
+        this.cidadeClient.findByEstado(id).then(
+            success => this.cidadesList = success,
+            error => console.log(error)
+        )
+
+        console.log(this.cidadesList)
+    }
+
+    private selectCaminhaoList(): void {
+        this.caminhaoClient.findAll().then(
+            success => this.caminhaoList = success,
+            error => console.log(error)
+        )
+    }
+
+    private selectUsuarioList(): void {
+        this.usuarioClient.findAll().then(
+            success => this.usuarioList = success,
+            error => console.log(error)
+        )
+    }
+
+    public estadoSelecionado(id: number): void {
+        if (id == null) {
+            return
+        }
+
+
+
+
+    }
+
+
 }
 </script>
 
 
 
 <style>
+.paidetodas {
+
+    display: flex;
+
+    justify-content: center;
+
+    height: 450px;
+    border-radius: 25px;
+    width: 80%;
+
+    background-color: rgba(178, 236, 176, 0.842);
+}
+
+.colums {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+
+    align-items: center;
+
+
+}
+
+.OrdenandoCadastro {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    gap: 5%;
+}
+
+.classeButoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+}
+
 .Inpts {
     text-align: justify;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-
+    justify-content: center
+        /* gap: 10% */
 }
 
 
@@ -137,9 +290,9 @@ export default class FreteCadastrarView extends Vue {
 }
 
 button {
-    height: 25px;
+    height: 40px;
     border-radius: 5%;
-    width: 10%;
+    width: 160%;
     color: black;
     font-weight: bold;
     border: 2px solid rgb(59, 59, 167);

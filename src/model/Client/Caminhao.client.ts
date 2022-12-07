@@ -7,7 +7,7 @@ export class CaminhaoClient {
 
     constructor() {
         this.axiosClient = axios.create({
-            baseURL: "http//:localhost:8080/api/caminhao",
+            baseURL: "http://localhost:8080/api/caminhao",
             headers: {
                 'Content-type': 'application/json'
             }

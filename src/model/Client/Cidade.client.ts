@@ -7,7 +7,7 @@ export class CidadeClient {
 
     constructor() {
         this.axiosClient = axios.create({
-            baseURL: "http//:localhost:8080/api/cidade",
+            baseURL: "http://localhost:8080/api/cidade",
             headers: {
                 'Content-type': 'application/json'
             }
@@ -17,6 +17,15 @@ export class CidadeClient {
     public async findById(id: number): Promise<Cidade> {
         try {
             return (await this.axiosClient.get<Cidade>(`/${id}`)).data
+
+        } catch (error: any) {
+            return Promise.reject(error.response)
+        }
+    }
+
+    public async findByEstado(id: number): Promise<Cidade[]> {
+        try {
+            return (await this.axiosClient.get<Cidade[]>(`/estado/ ${id}`)).data
 
         } catch (error: any) {
             return Promise.reject(error.response)
