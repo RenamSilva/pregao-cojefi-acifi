@@ -4,6 +4,7 @@ import { Caminhao } from "@/model/Class/Caminhao"
 import { Cidade } from "@/model/Class/Cidade"
 import { Produto } from "@/model/Class/Produto"
 import { Usuario } from "@/model/Class/Usuario"
+import { Estado } from "./Estado"
 
 export class Frete extends AbstractEntity {
 
@@ -20,9 +21,12 @@ export class Frete extends AbstractEntity {
     produto!: Produto
     motorista!: Usuario
     cidadeOrigem!: Cidade
-    cidadeDesino!: Cidade
+    cidadeDestino!: Cidade
+    estado!: Estado
+    estado2!: Estado
     caminhao!: Caminhao
     statusFrete!: StatusFrete
+
 
 
 }

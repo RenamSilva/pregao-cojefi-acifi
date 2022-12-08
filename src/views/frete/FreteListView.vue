@@ -17,9 +17,10 @@
 
                         <th>Caminhão Placa </th>
                         <th>Produto </th>
-                        <th>Observação </th>
+                        <!-- <th>Observação </th> -->
                         <th>Situacao </th>
                         <th>Status Frete </th>
+                        <th>Ações </th>
                     </tr>
                 </thead>
 
@@ -34,35 +35,60 @@
 
 
                         <th>{{ item.cidadeOrigem.nome }}</th>
-                        <th>{{ item.cidadeDesino.nome }}</th>
+                        <th>{{ item.cidadeDestino.nome }}</th>
 
                         <th>{{ item.caminhao.placa }}</th>
 
                         <th>{{ item.produto.nome }}</th>
-                        <th>{{ item.observacao }}</th>
+                        <!-- <th>{{ item.observacao }}</th> -->
                         <th>
-                            <span v-if="item.ativo" class="tag in-success">Ativo</span>
-                            <span v-if="!item.ativo" class="tag in-danger">Inativo</span>
+                            <span v-if="item.ativo" class="tag is-success">Ativo</span>
+                            <span v-if="!item.ativo" class="tag is-danger">Inativo</span>
                         </th>
 
 
 
                         <th>
-
-                            <span v-if="(item.statusFrete === 'em_transporte')" class="tag is-info">Em carga</span>
+                            <span v-if="(item.statusFrete === 'em_transporte')" class="tag is-link">Em transporte</span>
                             <span v-if="(item.statusFrete === 'carga')" class="tag is-info">Em carga</span>
                             <span v-if="(item.statusFrete === 'interrompido')"
                                 class="tag is-warning">Interrompido</span>
-                            <span v-if="(item.statusFrete === 'descarga')" class="tag is-primary">Descarga</span>
-                            <span v-if="(item.statusFrete === 'interrompido')"
-                                class="tag is-success">Interrompido</span>
-                            <span v-if="(item.statusFrete === 'faturado')" class="tag is-danger">Faturado</span>
+                            <span v-if="(item.statusFrete === 'descarga')" class="tag is-dark">Descarga</span>
+                            <span v-if="(item.statusFrete === 'faturado')" class="tag is-success">Faturado</span>
+                            <span v-if="(item.statusFrete === 'cancelado')" class="tag is-danger">Cancelado</span>
+                        </th>
+
+                        <th>
+
+                            <div class="acoes" v-if="(item.statusFrete === 'carga')">
+                                <button class="button is-small is-default is-primary is-outlined">T</button>
+                                <button class="button is-small is-default is-link is-outlined">I</button>
+                                <button class="button is-small is-default is-danger is-outlined">C</button>
+                            </div>
+
+                            <div class="acoes" v-if="(item.statusFrete === 'em_transporte')">
+                                <button class="button is-small is-default is-link is-outlined">I</button>
+                                <button class="button is-small is-default is-dark is-outlined">D</button>
+                            </div>
+
+                            <div class="acoes" v-if="(item.statusFrete === 'interrompido')">
+                                <button class="button is-small is- is-info is-outlined">CR</button>
+                                <button class="button is-small is-default is-link is-outlined">T</button>
+                                <button class="button is-small is-default is-danger is-outlined">C</button>
+                            </div>
+
+                            <div class="acoes" v-if="(item.statusFrete === 'cancelado')">
+                                <button class="button is-small is-default is-info is-outlined">CR</button>
+                                <button class="button is-small is-default is-link is-outlined">I</button>
+                            </div>
+
+                            <div class="acoes" v-if="(item.statusFrete === 'descarga')">
+                                <button class="button is-small is-default is-success is-outlined">F</button>
+                            </div>
+
 
 
                         </th>
-
-
-
 
 
 
@@ -129,10 +155,14 @@ export default class FreteListView extends Vue {
     border-radius: 25px;
 }
 
+th {
+    border: 1px solid black
+}
+
 .Fundos {
     background: rgba(250, 243, 243, 0.747);
     width: 100%;
-    height: 100vh;
+    height: 800vh;
 
 }
 
@@ -141,9 +171,6 @@ table tr th {
 }
 
 button {
-    margin-left: 43%;
-    margin-top: 5%;
-
     height: 30px;
     border-radius: 5%;
     width: 10%;
@@ -159,5 +186,17 @@ button:hover {
     color: white;
     font-weight: bold;
     transition: 0.5s;
+}
+
+.acoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.alinhaacoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

@@ -15,35 +15,25 @@
                 <!-- part1 -->
                 <div class="Anaju">
                     <div class="OrdenandoCadastro">
-
-
-
                         <div class="ordenaorigemdestino">
+
                             <div class="Origem">
                                 <div class="select is-fullwidith">
-                                    <select>
-                                        <option selected hidden="true">Estado Origem</option>
-                                        <option v-for="item in estadoList" :key="item.id"
-                                            @click="estadoSelecionado(item.id)">
-                                            {{
-                                                    item.nome
-                                            }}
+                                    <select @change="estadoSelecionado($event)">
+                                        <option selected hidden disabled>Estado Origem</option>
+                                        <option v-for="estado in estadoList" :value="estado.id" :key="estado.id">
+                                            {{ estado.nome }}
                                         </option>
                                     </select>
-
-
-
-
                                 </div>
 
-
-
                                 <div class="select is-fullwidith">
-                                    <select>
-                                        <option selected hidden="true">Cidade Origem</option>
-                                        <option v-for="item in cidadesList" :key="item.id"> {{ item.nome }}</option>
+                                    <select @change="changeCidadeOrigem($event)">
+                                        <option selected hidden disabled>Cidade Origem</option>
+                                        <option v-for="origem in cidadesList" :value="origem.id" :key="origem.id">
+                                            {{ origem.nome }}
+                                        </option>
                                     </select>
-
                                 </div>
 
                             </div>
@@ -51,63 +41,61 @@
 
                             <div class="Destino">
                                 <div class="select is-fullwidith">
-                                    <select>
-                                        <option selected hidden="true">Estado Destino</option>
-                                        <option v-for="item in estadoList" :key="item.id"
-                                            @click="estadoSelecionado(item.id)">
-                                            {{
-                                                    item.nome
-                                            }}
+                                    <select @change="estadoDestinoSelecionado($event)">
+                                        <option selected hidden disabled>Estado Destino</option>
+                                        <option v-for="estado in estadoList" :value="estado.id" :key="estado.id">
+                                            {{ estado.nome }}
                                         </option>
                                     </select>
 
                                 </div>
 
                                 <div class="select is-fullwidith">
-                                    <select>
-                                        <option selected hidden="true">Cidade Destino</option>
-                                        <option v-for="item in cidadesList" :key="item.id"> {{ item.nome }}</option>
+                                    <select @change="changeCidadeDestino($event)">
+                                        <option selected hidden disabled>Cidade Destino</option>
+                                        <option v-for="destino in cidadesDestinoList" :value="destino.id"
+                                            :key="destino.id">
+                                            {{ destino.nome }}
+                                        </option>
                                     </select>
-
                                 </div>
-
                             </div>
+
                         </div>
 
-
                         <div class="ordenaoutroselementos">
-
-
                             <div class="OrdenandoCadastro1">
                                 <div class="ordenandosete">
+
                                     <div class="elementos1">
 
                                         <div class="select is-fullwidith">
-                                            <select>
-                                                <option selected hidden="true">Selecione um Produto </option>
-                                                <option v-for="item in produtoList" :key="item.id"> {{ item.nome }}
+                                            <select @change="changeProduto($event)">
+                                                <option selected hidden disabled>Selecione um Produto </option>
+                                                <option v-for="produto in produtoList" :value="produto.id"
+                                                    :key="produto.id"> {{ produto.nome }}
                                                 </option>
                                             </select>
-
                                         </div>
 
                                         <div class="select is-fullwidith">
-                                            <select>
-                                                <option selected hidden="true">Selecione um Motorista</option>
-                                                <option v-for="item in usuarioList" :key="item.id"> {{ item.nome }}
+                                            <select @change="changeMotorista($event)">
+                                                <option selected hidden disabled>Selecione um Motorista</option>
+                                                <option v-for="motorista in usuarioList" :value="motorista.id"
+                                                    key="motorista.id"> {{ motorista.nome }}
                                                 </option>
                                             </select>
                                         </div>
-
 
                                     </div>
 
                                     <div class="elementos2">
 
                                         <div class="select is-fullwidith">
-                                            <select>
-                                                <option selected hidden="true">Selecione um Caminhao</option>
-                                                <option v-for="item in caminhaoList" :key="item.id"> {{ item.placa }}
+                                            <select @change="changeCaminhao($event)">
+                                                <option selected hidden disabled>Selecione um Caminhao</option>
+                                                <option v-for="caminhao in caminhaoList" :value="caminhao.id"
+                                                    :key="caminhao.id"> {{ caminhao.placa }}
                                                 </option>
                                             </select>
                                         </div>
@@ -115,27 +103,14 @@
                                         <input class="input" type="number" v-model="frete.precoTonelada"
                                             placeholder="Preço por Tonelada" />
 
-
                                     </div>
                                 </div>
-
                             </div>
-
-
-
-
                         </div>
-
-
-
                     </div>
+
                 </div>
-
-
-
             </div>
-
-
         </div>
         <div class="classeButoes">
             <div class="Buttons">
@@ -146,10 +121,8 @@
             <div class="Buttons">
                 <a href="/frete"><button>Voltar</button></a>
             </div>
-
         </div>
     </div>
-
 </template>
 
 <script lang="ts">
@@ -187,6 +160,7 @@ export default class FreteCadastrarView extends Vue {
     public frete: Frete = new Frete()
     public produtoList: Produto[] = []
     public cidadesList: Cidade[] = []
+    public cidadesDestinoList: Cidade[] = []
     public estadoList: Estado[] = []
     public caminhaoList: Caminhao[] = []
     public usuarioList: Usuario[] = []
@@ -199,18 +173,22 @@ export default class FreteCadastrarView extends Vue {
         this.selectUsuarioList();
     }
 
-    public onClickCadastrar(): void {
-
-
-        this.freteClient.cadastrar(this.frete).then(
-            success => {
-                console.log('Registro cadastrado com sucesso!')
-                this.frete = new Frete();
-
-            }, error => {
-                console.log(error)
+    public async onClickCadastrar(): Promise<void> {
+        try {
+            const data = {
+                caminhaoId: this.frete.caminhao,
+                cidadeDestinoId: this.frete.cidadeDestino,
+                cidadeOrigemId: this.frete.cidadeOrigem,
+                motoristaId: this.frete.motorista,
+                precoTonelada: this.frete.precoTonelada,
+                produtoId: this.frete.produto
             }
-        )
+
+            await this.freteClient.cadastrar(data)
+            this.$router.push('/frete')
+        } catch (error: any) {
+            console.log(error)
+        }
 
     }
 
@@ -229,9 +207,16 @@ export default class FreteCadastrarView extends Vue {
         )
     }
 
-    public selectCidadeList(id: number): void {
+    private selectCidadeList(id: number): void {
         this.cidadeClient.findByEstado(id).then(
             success => this.cidadesList = success,
+            error => console.log(error)
+        )
+    }
+
+    private selectCidadeDestinoList(id: number): void {
+        this.cidadeClient.findByEstado(id).then(
+            success => this.cidadesDestinoList = success,
             error => console.log(error)
         )
 
@@ -262,12 +247,39 @@ export default class FreteCadastrarView extends Vue {
         )
     }
 
-    public estadoSelecionado(id: number): void {
-        if (id == null) {
+    public estadoSelecionado(event: any): void {
+        if (event.target.value == null) {
             return
         }
+        this.selectCidadeList(event.target.value);
     }
 
+    public estadoDestinoSelecionado(event: any): void {
+        if (event.target.value == null) {
+            return
+        }
+        this.selectCidadeDestinoList(event.target.value);
+    }
+
+    public changeCidadeOrigem(event: any): void {
+        this.frete.cidadeOrigem = event.target.value;
+    }
+
+    public changeCidadeDestino(event: any): void {
+        this.frete.cidadeDestino = event.target.value;
+    }
+
+    public changeProduto(event: any): void {
+        this.frete.produto = event.target.value;
+    }
+
+    public changeMotorista(event: any): void {
+        this.frete.motorista = event.target.value;
+    }
+
+    public changeCaminhao(event: any): void {
+        this.frete.caminhao = event.target.value;
+    }
 
 }
 </script>

@@ -43,6 +43,7 @@ export class CidadeClient {
 
     public async cadastrar(cidade: Cidade): Promise<void> {
         try {
+
             return (await this.axiosClient.post(``, cidade)).data
 
         } catch (error: any) {

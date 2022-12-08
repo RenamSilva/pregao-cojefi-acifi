@@ -14,4 +14,7 @@ export class Usuario extends AbstractEntity {
     endereco!: string
     observacao!: string
     grupo!: Grupo
+
+
+
 }

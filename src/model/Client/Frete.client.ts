@@ -34,8 +34,9 @@ export class FreteClient {
         }
     }
 
-    public async cadastrar(frete: Frete): Promise<void> {
+    public async cadastrar(frete: any): Promise<void> {
         try {
+            console.log(frete)
             return (await this.axiosClient.post(``, frete)).data
 
         } catch (error: any) {
