@@ -26,7 +26,6 @@ public abstract class AbstractEntity {
     private LocalDateTime dataAtualizado;
 
     @Getter @Setter
-    @JsonIgnore
     private boolean ativo;
 
     @PrePersist

@@ -43,7 +43,7 @@ public class EmpresaController {
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody Empresa empresa) {
         try {
             this.empresaService.update(id, empresa);
-            return ResponseEntity.ok().body("Empresa Atualizado com Sucesso.");
+            return ResponseEntity.ok().body("Empresa Atualizada com Sucesso.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

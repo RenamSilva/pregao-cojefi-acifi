@@ -65,7 +65,7 @@ public class EmpresaService {
         if(empresaExiste == null){
             throw new Exception("Cnpj nao encontrado");
         }
-        this.empresaRepository.update(id, empresa.getNome());
+        this.empresaRepository.save(empresa);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
